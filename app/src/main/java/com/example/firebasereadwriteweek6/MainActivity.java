@@ -3,6 +3,7 @@ package com.example.firebasereadwriteweek6;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -139,6 +140,10 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, user.getEmail(), Toast.LENGTH_SHORT).show();
         }else{
             Toast.makeText(this, "Login Failed", Toast.LENGTH_SHORT).show();
+            //Load google Profile if successful
+            WebView webView = new WebView(this);
+            setContentView(webView);
+            webView.loadUrl("https://myaccount.google.com/profile");
         }
     }
 
