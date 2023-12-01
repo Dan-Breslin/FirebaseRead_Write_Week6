@@ -18,6 +18,7 @@ import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract;
 import com.firebase.ui.auth.IdpResponse;
 import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult;
+import com.firebase.ui.auth.data.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -84,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String data = data_input.getText().toString();
                 myRef1.setValue(data);
+                Toast.makeText(MainActivity.this, "User " + data + " added", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -92,7 +94,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 myRef1.removeValue();
+                Toast.makeText(MainActivity.this, "User Removed", Toast.LENGTH_SHORT).show();
+
             }
+
         });
 
         get = (Button) findViewById(R.id.btn_Get);
@@ -138,12 +143,13 @@ public class MainActivity extends AppCompatActivity {
         if(result.getResultCode()==RESULT_OK){
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             Toast.makeText(this, user.getEmail(), Toast.LENGTH_SHORT).show();
+            //Load google Profile if successful
+//            WebView webView = new WebView(this);
+//            setContentView(webView);
+//            webView.loadUrl("https://myaccount.google.com/profile");
         }else{
             Toast.makeText(this, "Login Failed", Toast.LENGTH_SHORT).show();
-            //Load google Profile if successful
-            WebView webView = new WebView(this);
-            setContentView(webView);
-            webView.loadUrl("https://myaccount.google.com/profile");
+//
         }
     }
 
